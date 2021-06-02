@@ -25,7 +25,7 @@ namespace PresentationWeb.Controllers
             Response.WriteAsync("<html lang=fr>");
             Response.WriteAsync("<head>");
             Response.WriteAsync("<meta charset='UTF-8'>");
-            Response.WriteAsync("<title>Mes pokemons</title>");
+            Response.WriteAsync("<title>Mes pokemons de ouf</title>");
             Response.WriteAsync("</head>");
             Response.WriteAsync("<body>");
             Response.WriteAsync("<h1>MES POKEMONS</h1>");
