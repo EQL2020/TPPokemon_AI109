@@ -15,7 +15,7 @@ namespace PresentationWeb.Controllers
             Response.WriteAsync("<!DOCTYPE html>");
             Response.WriteAsync("<html lang=fr>");
             Response.WriteAsync("<head>");
-            Response.WriteAsync("<title>Plop</title>");
+            Response.WriteAsync("<title>Plip</title>");
             Response.WriteAsync("</head>");
             Response.WriteAsync("<body>");
             Response.WriteAsync("<h1>Hello World</h1>");
