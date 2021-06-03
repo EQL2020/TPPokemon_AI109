@@ -11,8 +11,13 @@ namespace PresentationWeb.Controllers
 {
     public class PokemonController : Controller
     {
-        // GET: HelloController
-        public EmptyResult Index()
+       
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public EmptyResult AncienneVersion()
         {
             // récupérer les données à afficher
             PokemonBU bu = new PokemonBU();
