@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
         // GET: PlopController
         public ActionResult Index()
         {
-            List<Pokemon> pokemons = new PokemonBU().GetList();
+            List<Pokemon> pokemons = null;// new PokemonBU().GetList();
 
             //ViewBag.Pokemons = pokemons;
 

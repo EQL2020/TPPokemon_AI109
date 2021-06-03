@@ -9,11 +9,17 @@
 
 @model List<Pokemon>
 
-<h1>Mes Pokemons</h1>
+@{ 
+    int nbPokemons = Model.Count;
+    int nbRestants = 100 - nbPokemons;
+}
+
+<h1>Mes Pokemons (@nbPokemons)</h1>
+<h2>Il reste @nbRestants emplacements disponibles</h2>
 
 <ul>
     @foreach(Pokemon p in Model)
      {
-     <li>@p.Nom.ToUpper() - @p.DateCreation.ToString("dd MMMM yyyy")</li>           
+     <li>@p.Nom.ToUpper() - @p.DateCreation.ToString("dd MMMM yyyy")</li>
      }
 </ul>
