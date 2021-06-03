@@ -14,7 +14,18 @@ namespace PresentationWeb.Controllers
        
         public IActionResult Index()
         {
-            return View();
+            // Action : Index
+            // Controller : PokemonController 
+            // View : Pokemon/index.cshtml
+            // Model : Liste de Pokemons
+
+            // récupérer le modèles (données à afficher)
+            PokemonBU bu = new PokemonBU();
+            List<Pokemon> pokemons = bu.GetPokemons();
+
+            // je charge la vue en lui passant le modèle
+            // en paramètre :
+            return View(pokemons);
         }
 
         public EmptyResult AncienneVersion()

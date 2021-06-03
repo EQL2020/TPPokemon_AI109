@@ -1,12 +1,19 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    @using : namespace de la classe Pokemon
+
+    @model : 
+    Vue fortement typée : on lui indique le type de données du modèle
 *@
 
-@{
+@using Fr.EQL.AI109.TPPokemon.Model
 
-}
+@model List<Pokemon>
 
+<h1>Mes Pokemons</h1>
 
-<h1 class="">Mes Pokemons</h1>
-
-<p>je suis dans la liste des pokemons....</p>
+<ul>
+    @foreach(Pokemon p in Model)
+     {
+     <li>@p.Nom.ToUpper() - @p.DateCreation.ToString("dd MMMM yyyy")</li>           
+     }
+</ul>
