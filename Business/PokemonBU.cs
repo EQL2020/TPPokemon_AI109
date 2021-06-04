@@ -27,7 +27,6 @@ namespace Fr.EQL.AI109.TPPokemon.Business
             // envoyer au DataAccess pour insertion
             PokemonDAO dao = new PokemonDAO();
             dao.Create(p);
-
         }
 
         public List<Pokemon> GetPokemons()
@@ -40,5 +39,16 @@ namespace Fr.EQL.AI109.TPPokemon.Business
             PokemonDAO dao = new PokemonDAO();
             return dao.GetAll();
         }
+
+        public Pokemon GetPokemon(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("l'identifiant doit être positif");
+            }
+
+            return new PokemonDAO().GetById(id);
+        }
+
     }
 }

@@ -12,6 +12,7 @@ namespace PresentationWeb.Controllers
     public class PokemonController : Controller
     {
        
+        // liste des pokemons
         public IActionResult Index()
         {
             // Action : Index
@@ -28,6 +29,17 @@ namespace PresentationWeb.Controllers
             return View(pokemons);
         }
 
+        public IActionResult Details(int id)
+        {
+            PokemonBU bu = new PokemonBU();
+            Pokemon p = bu.GetPokemon(id);
+
+            return View(p);
+        }
+
+
+
+        #region VIEUX CODE DE DEMO
         public EmptyResult AncienneVersion()
         {
             // récupérer les données à afficher
@@ -64,7 +76,6 @@ namespace PresentationWeb.Controllers
 
             return new EmptyResult();
         }
-
- 
+        #endregion
     }
 }

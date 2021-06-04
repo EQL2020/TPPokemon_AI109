@@ -65,5 +65,35 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
             return result;
         }
 
+        public Pokemon GetById(int id)
+        {
+            Pokemon result = null;
+
+            MySqlCommand cmd = CreerCommande();
+
+            cmd.CommandText = @"SELECT * 
+                                FROM pokemon 
+                                WHERE id = @id";
+
+            cmd.Parameters.Add(new MySqlParameter("@id", id));
+
+            cmd.Connection.Open();
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                result = new Pokemon();
+
+                result.Id = dr.GetInt32("id");
+                result.Nom = dr.GetString("nom");
+                result.Taille = dr.GetFloat("taille");
+                result.DateCreation = dr.GetDateTime("date_creation");
+            }
+
+            cmd.Connection.Close();
+
+            return result;
+        }
+
     }
 }

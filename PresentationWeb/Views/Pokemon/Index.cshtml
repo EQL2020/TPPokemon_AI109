@@ -20,6 +20,14 @@
 <ul>
     @foreach(Pokemon p in Model)
      {
-     <li>@p.Nom.ToUpper() - @p.DateCreation.ToString("dd MMMM yyyy")</li>
+        <li>
+            @p.Nom.ToUpper()
+            -
+            @p.DateCreation.ToString("dd MMMM yyyy")
+
+            <a asp-controller="Pokemon" asp-action="Details" asp-route-id="@p.Id">
+                détails
+            </a>
+</li>
      }
 </ul>
