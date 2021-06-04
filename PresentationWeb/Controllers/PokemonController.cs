@@ -33,7 +33,7 @@ namespace PresentationWeb.Controllers
             return View(pokemons);
         }
 
-        // pokedex/cree-depuis/2021-05-31
+        // pokedex/cree-depuis/2021-06-03
         [Route("pokedex/cree-depuis/{dateMin:DateTime}")]
         public IActionResult GetByDateMin(DateTime dateMin)
         {
@@ -49,7 +49,6 @@ namespace PresentationWeb.Controllers
         {
             PokemonBU bu = new PokemonBU();
             Pokemon p = bu.GetPokemon(id);
-
             return View(p);
         }
 

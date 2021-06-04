@@ -55,8 +55,12 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
                 p.Id = dr.GetInt32("id");
                 p.Nom = dr.GetString("nom");
                 p.Taille = dr.GetFloat("taille");
-                p.DateCreation = dr.GetDateTime("date_creation");
 
+                if (!dr.IsDBNull(dr.GetOrdinal("date_creation")))
+                {
+                    p.DateCreation = dr.GetDateTime("date_creation");
+                }
+                
                 result.Add(p);
             }
 

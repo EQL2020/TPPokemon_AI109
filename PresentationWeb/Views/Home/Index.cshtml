@@ -1,8 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    DateTime dateMin = DateTime.Today.AddDays(-6); // DateTime.Now.Date
+    string dateMinParam = dateMin.ToString("yyyy-MM-dd");
+
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+
+    <a asp-controller="Pokemon" asp-action="GetByDateMin" asp-route-dateMin="@dateMinParam">Voir les pokemons créés depuis hier...</a>
+
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

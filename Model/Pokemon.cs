@@ -15,8 +15,8 @@ namespace Fr.EQL.AI109.TPPokemon.Model
         #region PROPERTIES
         private int id;
         public string Nom { get; set; } // Property abrégée
-        public float Taille { get; set; }
-        public DateTime DateCreation { get; set; }
+        public float? Taille { get; set; }
+        public DateTime? DateCreation { get; set; }
 
         // PROPERTIES (=getter/setter) :
         public int Id
