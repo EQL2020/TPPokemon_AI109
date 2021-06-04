@@ -95,5 +95,35 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
             return result;
         }
 
+        public List<Pokemon> GetByDateCreationMinimum(DateTime dateMinimum)
+        {
+            List<Pokemon> result = new List<Pokemon>();
+
+            MySqlCommand cmd = CreerCommande();
+
+            cmd.CommandText = @"SELECT * FROM pokemon
+                                WHERE date_creation > @dateMin";
+
+            cmd.Parameters.Add(new MySqlParameter("@dateMin", dateMinimum));
+
+            cmd.Connection.Open();
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                Pokemon p = new Pokemon();
+
+                p.Id = dr.GetInt32("id");
+                p.Nom = dr.GetString("nom");
+                p.Taille = dr.GetFloat("taille");
+                p.DateCreation = dr.GetDateTime("date_creation");
+
+                result.Add(p);
+            }
+
+            cmd.Connection.Close();
+
+            return result;
+        }
     }
 }

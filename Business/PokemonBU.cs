@@ -40,6 +40,14 @@ namespace Fr.EQL.AI109.TPPokemon.Business
             return dao.GetAll();
         }
 
+        public List<Pokemon> GetPokemons(DateTime dateCreationMin)
+        {
+            //return new PokemonDAO().GetAll();
+            PokemonDAO dao = new PokemonDAO();
+            return dao.GetByDateCreationMinimum(dateCreationMin);
+        }
+
+
         public Pokemon GetPokemon(int id)
         {
             if (id <= 0)
@@ -49,6 +57,8 @@ namespace Fr.EQL.AI109.TPPokemon.Business
 
             return new PokemonDAO().GetById(id);
         }
+
+
 
     }
 }

@@ -11,8 +11,12 @@ namespace PresentationWeb.Controllers
 {
     public class PokemonController : Controller
     {
-       
+
         // liste des pokemons
+        // /Pokemon
+        // /Pokemon/Index
+        // Attributes :
+        [Route("pokedex")]
         public IActionResult Index()
         {
             // Action : Index
@@ -29,6 +33,18 @@ namespace PresentationWeb.Controllers
             return View(pokemons);
         }
 
+        // pokedex/cree-depuis/2021-05-31
+        [Route("pokedex/cree-depuis/{dateMin:DateTime}")]
+        public IActionResult GetByDateMin(DateTime dateMin)
+        {
+            PokemonBU bu = new PokemonBU();
+            List<Pokemon> pokemons = bu.GetPokemons(dateMin);
+
+            return View("Index", pokemons);
+        }
+
+        // pokedex/42
+        [Route("pokedex/{id:int}")]
         public IActionResult Details(int id)
         {
             PokemonBU bu = new PokemonBU();
