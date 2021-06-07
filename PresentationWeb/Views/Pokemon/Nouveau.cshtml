@@ -15,17 +15,20 @@
 
     <p>
         <label asp-for="Nom">Nom : </label>
-        <input asp-for="Nom" />
+        <input asp-for="Nom" placeholder="Pikachu" />
+        @Html.ValidationMessage("Nom")
     </p>
 
     <p>
         <label asp-for="Taille">Taille : </label>
-        <input asp-for="Taille" />
+        <input asp-for="Taille" placeholder="1,22"/>
+        @Html.ValidationMessage("Taille")
     </p>
-
+     
     <p>
         <label asp-for="DateCreation">Date de création :</label>
         <input asp-for="DateCreation" type="date" />
+        @Html.ValidationMessage("DateCreation")
     </p>
 
     <p>
