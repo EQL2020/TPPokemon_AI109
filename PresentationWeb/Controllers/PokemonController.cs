@@ -11,12 +11,31 @@ namespace PresentationWeb.Controllers
 {
     public class PokemonController : Controller
     {
+        //création d'un pokemon :
+
+        public IActionResult Nouveau()
+        {
+            return View();
+        }
+
+        // Corps de la requete :
+        //    Nom:bidule
+        //    Taille:1.45
+        //    DateCreation:17/02/2021
+        // ASP.NET >>> instancier un pokemon avec les valeurs postées
+        [HttpPost] // spécifier que cette action correspond à une requete POST
+        public IActionResult Nouveau(Pokemon p)
+        {
+            PokemonBU bu = new PokemonBU();
+            bu.InsererPokemon(p);
+
+            return View("Bravo");
+        }
+
 
         // liste des pokemons
-        // /Pokemon
-        // /Pokemon/Index
         // Attributes :
-        [Route("pokedex")]
+        [Route("pokedex")] // http://localhost/pokedex
         public IActionResult Index()
         {
             // Action : Index
@@ -43,7 +62,8 @@ namespace PresentationWeb.Controllers
             return View("Index", pokemons);
         }
 
-        // pokedex/42
+
+        // localhost/pokedex/42
         [Route("pokedex/{id:int}")]
         public IActionResult Details(int id)
         {

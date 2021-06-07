@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using Fr.EQL.AI109.TPPokemon.Model
+
+@model Pokemon 
+
+@{
+}
+
+<h1>Création d'un pokemon</h1>
+
+<form method="post">
+
+    <p>
+        <label asp-for="Nom">Nom : </label>
+        <input asp-for="Nom" />
+    </p>
+
+    <p>
+        <label asp-for="Taille">Taille : </label>
+        <input asp-for="Taille" />
+    </p>
+
+    <p>
+        <label asp-for="DateCreation">Date de création :</label>
+        <input asp-for="DateCreation" type="date" />
+    </p>
+
+    <p>
+        <button type="submit">Valider</button>
+    </p>
+</form>

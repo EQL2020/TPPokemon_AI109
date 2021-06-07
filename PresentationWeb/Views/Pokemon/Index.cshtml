@@ -17,6 +17,8 @@
 <h1>Mes Pokemons (@nbPokemons)</h1>
 <h2>Il reste @nbRestants emplacements disponibles</h2>
 
+<a asp-controller="Pokemon" asp-action="Nouveau">Ajouter un pokemon</a>
+
 <ul>
     @foreach (Pokemon p in Model)
     {
