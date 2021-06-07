@@ -12,7 +12,6 @@ namespace PresentationWeb.Controllers
     public class PokemonController : Controller
     {
         //création d'un pokemon :
-
         public IActionResult Nouveau()
         {
             return View();
@@ -26,10 +25,17 @@ namespace PresentationWeb.Controllers
         [HttpPost] // spécifier que cette action correspond à une requete POST
         public IActionResult Nouveau(Pokemon p)
         {
-            PokemonBU bu = new PokemonBU();
-            bu.InsererPokemon(p);
+            if (ModelState.IsValid) // validation du formulaire
+            {
+                PokemonBU bu = new PokemonBU();
+                bu.InsererPokemon(p);
 
-            return View("Bravo");
+                return View("Bravo");
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
