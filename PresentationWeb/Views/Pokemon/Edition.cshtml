@@ -9,9 +9,11 @@
 @{
 }
 
-<h1>Création d'un pokemon</h1>
+<h1>Edition d'un pokemon</h1>
 
 <form method="post">
+
+    <input type="hidden" asp-for="Id"/>
 
     <p>
         <label asp-for="Nom">Nom : </label>
@@ -39,10 +41,13 @@
             <option value="@c.Id">@c.Libelle</option>
             }
         </select>
-
     </p>
 
     <p>
-        <button type="submit">Valider</button>
+        <button type="submit" >Enregistrer</button>
+        @if (ViewContext.RouteData.Values["action"].ToString() == "Update")
+        {
+            <button type="submit" asp-controller="Pokemon" asp-action="Supprimer">Supprimer</button>
+        }
     </p>
 </form>

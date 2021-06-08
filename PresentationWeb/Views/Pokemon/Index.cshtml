@@ -26,9 +26,13 @@
         @p.Nom.ToUpper()
         -
         @(p.DateCreation.HasValue ? p.DateCreation.Value.ToString("dd MMMM yyyy") : "pas de date...")
-        
+
         <a asp-controller="Pokemon" asp-action="Details" asp-route-id="@p.Id">
             détails
+        </a>
+        
+        <a asp-controller="Pokemon" asp-action="Update" asp-route-id="@p.Id">
+            modifier
         </a>
     </li>
      }

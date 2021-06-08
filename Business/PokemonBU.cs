@@ -34,6 +34,16 @@ namespace Fr.EQL.AI109.TPPokemon.Business
             dao.Create(p);
         }
 
+        public void MettreAJourPokemon(Pokemon p)
+        {
+            new PokemonDAO().Update(p);
+        }
+
+        public void SupprimerPokemon(int id)
+        {
+            new PokemonDAO().Delete(id);
+        }
+
         public List<Pokemon> GetPokemons()
         {
             if (DateTime.Now.Hour < 8)

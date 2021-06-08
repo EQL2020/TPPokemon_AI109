@@ -32,7 +32,8 @@ namespace Fr.EQL.AI109.TPPokemon.Model
         #endregion
 
         #region PROPERTIES
-        private int id;
+        
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Vous devez donner un nom")] // obligatoire
         [MinLength(3, ErrorMessage = "Le nom doit faire au moins 3 caractères")] // au moins 3 caractères
@@ -48,23 +49,6 @@ namespace Fr.EQL.AI109.TPPokemon.Model
         // Utilisation de l'attribute personnalisé :
         [PokemonDateCreation]
         public DateTime? DateCreation { get; set; }
-
-        // PROPERTIES (=getter/setter) :
-        public int Id
-        {
-            get { return this.id; }
-            set 
-            {
-                if (value < 0)
-                {
-                    throw new Exception("Id incorrect");
-                }
-                else
-                {
-                    this.id = value;
-                }
-            }
-        }
 
         public int? IdDresseur { get; set; }
 

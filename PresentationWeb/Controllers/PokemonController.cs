@@ -11,15 +11,59 @@ namespace PresentationWeb.Controllers
 {
     public class PokemonController : Controller
     {
+        //affichage en mode édition :
+        [HttpGet]
+        [Route("pokedex/editer/{id:int}")]
+        public IActionResult Update(int id)
+        {
+            PokemonBU bu = new PokemonBU();
+            Pokemon p = bu.GetPokemon(id);
+
+            List<Categorie> categories = bu.GetCategories();
+            ViewBag.Categories = categories;
+
+            return View("Edition", p);
+        }
+
+
+        [HttpPost]
+        [Route("pokedex/editer/{id:int}")]
+        public IActionResult Update(Pokemon p)
+        {
+            PokemonBU bu = new PokemonBU();
+            
+            if (ModelState.IsValid)
+            {
+                bu.MettreAJourPokemon(p);
+                return View("Bravo");
+            }
+            else
+            {
+                List<Categorie> categories = bu.GetCategories();
+                ViewBag.Categories = categories;
+                return View("Edition");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Supprimer(Pokemon p)
+        {
+            new PokemonBU().SupprimerPokemon(p.Id.Value);
+            return RedirectToAction("Index", "Pokemon");
+            //return View("Bravo");
+        }
+
         //création d'un pokemon :
+        [HttpGet]
+        [Route("pokedex/nouveau")]
         public IActionResult Nouveau()
         {
             PokemonBU bu = new PokemonBU();
-            List<Categorie> categories = bu.GetCategories();
 
+            List<Categorie> categories = bu.GetCategories();
             ViewBag.Categories = categories;
 
-            return View();
+            return View("Edition");
         }
 
         // Corps de la requete :
@@ -28,6 +72,7 @@ namespace PresentationWeb.Controllers
         //    DateCreation:17/02/2021
         // ASP.NET >>> instancier un pokemon avec les valeurs postées
         [HttpPost] // spécifier que cette action correspond à une requete POST
+        [Route("pokedex/nouveau")]
         public IActionResult Nouveau(Pokemon p)
         {
             PokemonBU bu = new PokemonBU();
@@ -40,7 +85,7 @@ namespace PresentationWeb.Controllers
             {
                 List<Categorie> categories = bu.GetCategories();
                 ViewBag.Categories = categories;
-                return View();
+                return View("Edition");
             }
         }
 

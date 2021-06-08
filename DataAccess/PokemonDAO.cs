@@ -38,6 +38,42 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
             cmd.Connection.Close();
         }
 
+        public void Update(Pokemon p)
+        {
+            MySqlCommand cmd = CreerCommande();
+
+            #region configuration de la commande
+            cmd.CommandText = @"UPDATE pokemon SET
+                                nom = @nom,
+                                taille = @taille, 
+                                date_creation = @dateCreation, 
+                                id_categorie = @idCategorie
+                                WHERE id = @id";
+
+            cmd.Parameters.Add(new MySqlParameter("@nom", p.Nom));
+            cmd.Parameters.Add(new MySqlParameter("@taille", p.Taille));
+            cmd.Parameters.Add(new MySqlParameter("@dateCreation", p.DateCreation));
+            cmd.Parameters.Add(new MySqlParameter("@idCategorie", p.IdCategorie));
+            cmd.Parameters.Add(new MySqlParameter("@id", p.Id));
+            #endregion
+
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery(); // pour les commandes INSERT, UPDATE et DELETE
+            cmd.Connection.Close();
+        }
+
+        public void Delete(int id)
+        {
+            MySqlCommand cmd = CreerCommande();
+
+            cmd.CommandText = "DELETE FROM pokemon WHERE id = @id";
+            cmd.Parameters.Add(new MySqlParameter("@id", id));
+
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery(); // pour les commandes INSERT, UPDATE et DELETE
+            cmd.Connection.Close();
+        }
+
         public List<Pokemon> GetAll()
         {
             List<Pokemon> result = new List<Pokemon>();
