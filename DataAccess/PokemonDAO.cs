@@ -26,10 +26,11 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
             MySqlCommand cmd = CreerCommande();
             
             #region configuration de la commande
-            cmd.CommandText = "INSERT INTO pokemon (nom, taille, date_creation) values (@nom, @taille, @dateCreation)";
+            cmd.CommandText = "INSERT INTO pokemon (nom, taille, date_creation, id_categorie) values (@nom, @taille, @dateCreation, @idCategorie)";
             cmd.Parameters.Add(new MySqlParameter("@nom", p.Nom));
             cmd.Parameters.Add(new MySqlParameter("@taille", p.Taille));
             cmd.Parameters.Add(new MySqlParameter("@dateCreation", p.DateCreation));
+            cmd.Parameters.Add(new MySqlParameter("@idCategorie", p.IdCategorie));
             #endregion
 
             cmd.Connection.Open();
@@ -50,23 +51,20 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
 
             while(dr.Read())
             {
-                Pokemon p = new Pokemon();
+                Pokemon p = DataReaderToPokemon(dr);
 
-                p.Id = dr.GetInt32("id");
-                p.Nom = dr.GetString("nom");
-                p.Taille = dr.GetFloat("taille");
-
-                if (!dr.IsDBNull(dr.GetOrdinal("date_creation")))
-                {
-                    p.DateCreation = dr.GetDateTime("date_creation");
-                }
-                
                 result.Add(p);
             }
 
             cmd.Connection.Close();
 
             return result;
+        }
+
+        public List<Pokemon> GetByIdDresseur(int idDresseur)
+        {
+            // SELECT * FROM pokemon where id_dresseur = @idDresseur
+            return null;
         }
 
         public Pokemon GetById(int id)
@@ -86,12 +84,7 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
 
             if (dr.Read())
             {
-                result = new Pokemon();
-
-                result.Id = dr.GetInt32("id");
-                result.Nom = dr.GetString("nom");
-                result.Taille = dr.GetFloat("taille");
-                result.DateCreation = dr.GetDateTime("date_creation");
+                result = DataReaderToPokemon(dr);
             }
 
             cmd.Connection.Close();
@@ -115,12 +108,7 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
 
             while (dr.Read())
             {
-                Pokemon p = new Pokemon();
-
-                p.Id = dr.GetInt32("id");
-                p.Nom = dr.GetString("nom");
-                p.Taille = dr.GetFloat("taille");
-                p.DateCreation = dr.GetDateTime("date_creation");
+                Pokemon p = DataReaderToPokemon(dr);
 
                 result.Add(p);
             }
@@ -129,5 +117,32 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
 
             return result;
         }
+
+
+        private Pokemon DataReaderToPokemon(MySqlDataReader dr)
+        {
+            Pokemon result = new Pokemon();
+
+            result.Id = dr.GetInt32("id");
+            result.Nom = dr.GetString("nom");
+            result.Taille = dr.GetFloat("taille");
+            if (!dr.IsDBNull(dr.GetOrdinal("date_creation")))
+            {
+                result.DateCreation = dr.GetDateTime("date_creation");
+            }
+
+            if (!dr.IsDBNull(dr.GetOrdinal("id_dresseur")))
+            {
+                result.IdDresseur = dr.GetInt32("id_dresseur");
+            }
+
+            if (!dr.IsDBNull(dr.GetOrdinal("id_categorie")))
+            {
+                result.IdCategorie = dr.GetInt32("id_categorie");
+            }
+
+            return result;
+        }
+
     }
 }

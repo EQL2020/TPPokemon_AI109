@@ -12,6 +12,11 @@ namespace Fr.EQL.AI109.TPPokemon.Business
     public class PokemonBU
     {
 
+        public List<Categorie> GetCategories()
+        {
+            return new CategorieDAO().GetAll();
+        }
+
         public void InsererPokemon(Pokemon p)
         {
             // vérification des règles de gestion :

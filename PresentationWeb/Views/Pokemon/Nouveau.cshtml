@@ -32,6 +32,17 @@
     </p>
 
     <p>
+        <label asp-for="IdCategorie">Catégorie :</label>
+        <select asp-for="IdCategorie">
+            @foreach (Categorie c in ViewBag.Categories)
+            {
+            <option value="@c.Id">@c.Libelle</option>
+            }
+        </select>
+
+    </p>
+
+    <p>
         <button type="submit">Valider</button>
     </p>
 </form>

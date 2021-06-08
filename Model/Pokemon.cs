@@ -65,6 +65,13 @@ namespace Fr.EQL.AI109.TPPokemon.Model
                 }
             }
         }
+
+        public int? IdDresseur { get; set; }
+
+        public int? IdCategorie { get; set; }
+
+        public List<Pouvoir> Pouvoirs { get; set; }
+
         #endregion
 
         #region CONSTRUCTORS

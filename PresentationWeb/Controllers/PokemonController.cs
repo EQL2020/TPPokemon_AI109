@@ -14,6 +14,11 @@ namespace PresentationWeb.Controllers
         //création d'un pokemon :
         public IActionResult Nouveau()
         {
+            PokemonBU bu = new PokemonBU();
+            List<Categorie> categories = bu.GetCategories();
+
+            ViewBag.Categories = categories;
+
             return View();
         }
 
@@ -25,15 +30,16 @@ namespace PresentationWeb.Controllers
         [HttpPost] // spécifier que cette action correspond à une requete POST
         public IActionResult Nouveau(Pokemon p)
         {
+            PokemonBU bu = new PokemonBU();
             if (ModelState.IsValid) // validation du formulaire
             {
-                PokemonBU bu = new PokemonBU();
                 bu.InsererPokemon(p);
-
                 return View("Bravo");
             }
             else
             {
+                List<Categorie> categories = bu.GetCategories();
+                ViewBag.Categories = categories;
                 return View();
             }
         }
