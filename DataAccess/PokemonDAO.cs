@@ -74,6 +74,51 @@ namespace Fr.EQL.AI109.TPPokemon.DataAccess
             cmd.Connection.Close();
         }
 
+        public List<PokemonDetail> GetAllWithDetails()
+        {
+            List<PokemonDetail> result = new List<PokemonDetail>();
+
+            MySqlCommand cmd = CreerCommande();
+
+            cmd.CommandText = @"SELECT p.*, c.libelle 'libelle_categorie', d.nom 'nom_dresseur', d.prenom 'prenom_dresseur'
+                                FROM pokemon p
+                                INNER JOIN categorie c ON p.id_categorie = c.id
+                                LEFT JOIN dresseur d on p.id_dresseur = d.id";
+
+            cmd.Connection.Open();
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                Pokemon p = DataReaderToPokemon(dr);
+
+                PokemonDetail pd = new PokemonDetail();
+
+                pd.Id = p.Id;
+                pd.Nom = p.Nom;
+                pd.Taille = p.Taille;
+                pd.DateCreation = p.DateCreation;
+
+                pd.LibelleCategorie = dr.GetString("libelle_categorie");
+
+                if (!dr.IsDBNull(dr.GetOrdinal("nom_dresseur")))
+                {
+                    pd.NomDresseur = dr.GetString("nom_dresseur");
+                }
+
+                if (!dr.IsDBNull(dr.GetOrdinal("prenom_dresseur")))
+                {
+                    pd.PrenomDresseur = dr.GetString("prenom_dresseur");
+                }
+
+                result.Add(pd);
+            }
+
+            cmd.Connection.Close();
+
+            return result;
+        }
+
         public List<Pokemon> GetAll()
         {
             List<Pokemon> result = new List<Pokemon>();

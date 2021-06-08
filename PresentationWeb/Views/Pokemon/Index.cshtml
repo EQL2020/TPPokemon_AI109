@@ -7,7 +7,7 @@
 
 @using Fr.EQL.AI109.TPPokemon.Model
 
-@model List<Pokemon>
+@model List<PokemonDetail>
 
 @{ 
     int nbPokemons = Model.Count;
@@ -19,21 +19,45 @@
 
 <a asp-controller="Pokemon" asp-action="Nouveau">Ajouter un pokemon</a>
 
-<ul>
-    @foreach (Pokemon p in Model)
-    {
-    <li>
-        @p.Nom.ToUpper()
-        -
-        @(p.DateCreation.HasValue ? p.DateCreation.Value.ToString("dd MMMM yyyy") : "pas de date...")
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Créé le</th>
+        <th>Taille</th>
+        <th>Catégorie</th>
+        <th>Dresseur</th>
+        <th></th>
+        <th></th>
+    </tr>
 
-        <a asp-controller="Pokemon" asp-action="Details" asp-route-id="@p.Id">
-            détails
-        </a>
-        
-        <a asp-controller="Pokemon" asp-action="Update" asp-route-id="@p.Id">
-            modifier
-        </a>
-    </li>
+    @foreach (PokemonDetail p in Model)
+    {
+    <tr>
+        <td>
+            @p.Nom.ToUpper()
+        </td>
+        <td>
+            @(p.DateCreation.HasValue ? p.DateCreation.Value.ToString("dd MMMM yyyy") : "pas de date...")
+        </td>
+        <td>
+            @p.Taille
+        </td>
+        <td>
+            @p.LibelleCategorie
+        </td>
+        <td>
+            @p.PrenomDresseur @p.NomDresseur?.ToUpper()
+        </td>
+        <td>
+            <a asp-controller="Pokemon" asp-action="Details" asp-route-id="@p.Id">
+                détails
+            </a>
+        </td>
+        <td>
+            <a asp-controller="Pokemon" asp-action="Update" asp-route-id="@p.Id">
+                modifier
+            </a>
+        </td>
+    </tr>
      }
-</ul>
+</table>

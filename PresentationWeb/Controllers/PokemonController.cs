@@ -102,7 +102,7 @@ namespace PresentationWeb.Controllers
 
             // récupérer le modèles (données à afficher)
             PokemonBU bu = new PokemonBU();
-            List<Pokemon> pokemons = bu.GetPokemons();
+            List<PokemonDetail> pokemons = bu.GetAllWithDetails();
 
             // je charge la vue en lui passant le modèle
             // en paramètre :

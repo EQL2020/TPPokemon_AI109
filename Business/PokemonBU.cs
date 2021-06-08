@@ -44,6 +44,11 @@ namespace Fr.EQL.AI109.TPPokemon.Business
             new PokemonDAO().Delete(id);
         }
 
+        public List<PokemonDetail> GetAllWithDetails()
+        {
+            return new PokemonDAO().GetAllWithDetails();
+        }
+
         public List<Pokemon> GetPokemons()
         {
             if (DateTime.Now.Hour < 8)
